@@ -14,10 +14,13 @@ u = readmatrix('E:\LDPC_Encoder\info_bits.txt');
 %disp(size(u));
 S = zeros(no_rows_H, 1);
 %disp(size(S));
-valid_idx = col_idx(col_idx <= k);
 
-for i = 1:length(valid_idx)
-    c = valid_idx(i);
+
+for i = 1:length(col_idx)
+    c = col_idx(i);
+    if c > k
+        continue
+    end
     r = row_idx(i);
     S(r,1) = xor(S(r,1), u(c,1));
 end
@@ -36,12 +39,4 @@ end
 %disp('encoded bits:');
 c = [u;P];
 disp(c.');
-
-
-
-
-
-
-
-
 
